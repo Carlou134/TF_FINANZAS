@@ -23,4 +23,14 @@ public class TasasServiceImpl implements ITasasService {
     public List<Tasas> vrlist() {
         return vrtR.findAll();
     }
+
+    @Override
+    public void delete(int IdTasa) {
+        vrtR.deleteById(IdTasa);
+    }
+
+    @Override
+    public Tasas listId(int IdTasa) {
+        return vrtR.findById(IdTasa).orElse(new Tasas());
+    }
 }

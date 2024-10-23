@@ -7,4 +7,6 @@ import java.util.List;
 public interface ITasasService {
     public void insert(Tasas tasas);
     public List<Tasas> vrlist();
+    public void delete(int IdTasa);
+    public Tasas listId(int IdTasa);
 }

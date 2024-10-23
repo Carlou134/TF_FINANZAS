@@ -30,4 +30,23 @@ public class TasasController {
             return vrm.map(x,TasasDTO.class);
         }).collect(Collectors.toList());
     }
+
+    @DeleteMapping("/{id}")
+    public void eliminar(@PathVariable("id") Integer id){
+        vrTs.delete(id);
+    }
+
+    @GetMapping("/{id}")
+    public TasasDTO listarDTO(@PathVariable("id") Integer id){
+        ModelMapper m = new ModelMapper();
+        TasasDTO dto = m.map(vrTs.listId(id),TasasDTO.class);
+        return dto;
+    }
+
+    @PutMapping
+    public void modificar(@RequestBody TasasDTO dto){
+        ModelMapper m = new ModelMapper();
+        Tasas t = m.map(dto, Tasas.class);
+        vrTs.insert(t);
+    }
 }
