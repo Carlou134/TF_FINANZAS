@@ -1,11 +1,12 @@
 package pe.edu.upc.aaw.tf_finanzas.dtos;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class CarteraDTO {
     private int id;
     private String nombre_cartera ;
-    private Date fecha_descuento;
+    private LocalDate fecha_descuento;
 
     public int getId() {
         return id;
@@ -23,11 +24,11 @@ public class CarteraDTO {
         this.nombre_cartera = nombre_cartera;
     }
 
-    public Date getFecha_descuento() {
+    public LocalDate getFecha_descuento() {
         return fecha_descuento;
     }
 
-    public void setFecha_descuento(Date fecha_descuento) {
+    public void setFecha_descuento(LocalDate fecha_descuento) {
         this.fecha_descuento = fecha_descuento;
     }
 }
