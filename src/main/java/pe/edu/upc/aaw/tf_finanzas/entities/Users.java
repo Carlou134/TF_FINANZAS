@@ -28,11 +28,15 @@ public class Users implements Serializable {
     private char genero;
     @Column(length = 200)
     private String correo_electronico;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "usercartera_id")
+    private List<UserCartera> userCarteras;
+
 
     public Users() {
     }
 
-    public Users(Long id, String username, String password, Boolean enabled, List<Role> roles, String nombre, String apellido, char genero, String correo_electronico) {
+    public Users(Long id, String username, String password, Boolean enabled, List<Role> roles, String nombre, String apellido, char genero, String correo_electronico, List<UserCartera> userCarteras) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -42,6 +46,7 @@ public class Users implements Serializable {
         this.apellido = apellido;
         this.genero = genero;
         this.correo_electronico = correo_electronico;
+        this.userCarteras = userCarteras;
     }
 
     public Long getId() {
@@ -114,5 +119,13 @@ public class Users implements Serializable {
 
     public void setCorreo_electronico(String correo_electronico) {
         this.correo_electronico = correo_electronico;
+    }
+
+    public List<UserCartera> getUserCarteras() {
+        return userCarteras;
+    }
+
+    public void setUserCarteras(List<UserCartera> userCarteras) {
+        this.userCarteras = userCarteras;
     }
 }
