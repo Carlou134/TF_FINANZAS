@@ -22,12 +22,13 @@ public class Users implements Serializable {
     @JoinColumn(name = "user_id")
     private List<Role> roles;
     @Column(length = 100)
-    private String nombre;
-    @Column(length = 30)
-    private String apellido;
-    private char genero;
+    private String razon_social;
+    @Column(length = 11)
+    private String ruc;
     @Column(length = 200)
-    private String correo_electronico;
+    private String direccion;
+    @Column(length = 200)
+    private String email;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "usercartera_id")
     private List<UserCartera> userCarteras;
@@ -36,16 +37,16 @@ public class Users implements Serializable {
     public Users() {
     }
 
-    public Users(Long id, String username, String password, Boolean enabled, List<Role> roles, String nombre, String apellido, char genero, String correo_electronico, List<UserCartera> userCarteras) {
+    public Users(Long id, String username, String password, Boolean enabled, List<Role> roles, String razon_social, String ruc, String direccion, String email, List<UserCartera> userCarteras) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.enabled = enabled;
         this.roles = roles;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.genero = genero;
-        this.correo_electronico = correo_electronico;
+        this.razon_social = razon_social;
+        this.ruc = ruc;
+        this.direccion = direccion;
+        this.email = email;
         this.userCarteras = userCarteras;
     }
 
@@ -89,36 +90,36 @@ public class Users implements Serializable {
         this.roles = roles;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getRazon_social() {
+        return razon_social;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setRazon_social(String razon_social) {
+        this.razon_social = razon_social;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getRuc() {
+        return ruc;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setRuc(String ruc) {
+        this.ruc = ruc;
     }
 
-    public char getGenero() {
-        return genero;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setGenero(char genero) {
-        this.genero = genero;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
-    public String getCorreo_electronico() {
-        return correo_electronico;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCorreo_electronico(String correo_electronico) {
-        this.correo_electronico = correo_electronico;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public List<UserCartera> getUserCarteras() {

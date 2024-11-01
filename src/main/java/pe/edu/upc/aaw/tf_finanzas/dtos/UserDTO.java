@@ -7,10 +7,10 @@ public class UserDTO {
     private String username;
     private String password;
     private Boolean enabled;
-    private String nombre;
-    private String apellido;
-    private char genero;
-    private String correo_electronico;
+    private String razon_social;
+    private String ruc;
+    private String direccion;
+    private String email;
 
     public Long getId() {
         return id;
@@ -44,35 +44,35 @@ public class UserDTO {
         this.enabled = enabled;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getRazon_social() {
+        return razon_social;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setRazon_social(String razon_social) {
+        this.razon_social = razon_social;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getRuc() {
+        return ruc;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setRuc(String ruc) {
+        this.ruc = ruc;
     }
 
-    public char getGenero() {
-        return genero;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setGenero(char genero) {
-        this.genero = genero;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
-    public String getCorreo_electronico() {
-        return correo_electronico;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCorreo_electronico(String correo_electronico) {
-        this.correo_electronico = correo_electronico;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
