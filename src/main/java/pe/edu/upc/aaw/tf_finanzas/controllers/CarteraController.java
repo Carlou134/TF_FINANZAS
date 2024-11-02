@@ -2,14 +2,17 @@ package pe.edu.upc.aaw.tf_finanzas.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.aaw.tf_finanzas.dtos.CarteraDTO;
+import pe.edu.upc.aaw.tf_finanzas.dtos.CarteraUpdateDTO;
 import pe.edu.upc.aaw.tf_finanzas.entities.Cartera;
+import pe.edu.upc.aaw.tf_finanzas.entities.Users;
 import pe.edu.upc.aaw.tf_finanzas.servicesinterfaces.ICarteraService;
+import pe.edu.upc.aaw.tf_finanzas.servicesinterfaces.IUserService;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -18,11 +21,39 @@ public class CarteraController {
     @Autowired
     private ICarteraService vrCs;
 
+    @Autowired
+    private IUserService uS;
+
     @PostMapping
     public void registrar(@RequestBody CarteraDTO vrdto) {
-        ModelMapper vrm = new ModelMapper();
-        Cartera vrc = vrm.map(vrdto, Cartera.class);
-        vrCs.insert(vrc);
+        // Obtener el username del contexto de seguridad
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+
+        // Buscar el usuario
+        List<Users> usuarios = uS.buscarUsername(username);
+        if (!usuarios.isEmpty()) {
+            ModelMapper vrm = new ModelMapper();
+            Cartera vrc = vrm.map(vrdto, Cartera.class);
+
+            // Establecer el usuario actual
+            vrc.setUsuarios(usuarios.get(0));
+
+            // Establecer valores predeterminados
+            vrc.setEstado("PENDIENTE");
+            vrc.setTotal_valor_nominal(0.0);
+            vrc.setTotal_valor_portes(0.0);
+            vrc.setTotal_comision_estudios(0.0);
+            vrc.setTotal_desembolso_cobranza(0.0);
+            vrc.setTotal_igv(0.0);
+            vrc.setTotal_valor_neto(0.0);
+            vrc.setTcea(0.0);
+            vrc.setDias_promedio(0);
+
+            vrCs.insert(vrc);
+        } else {
+            throw new RuntimeException("Usuario no encontrado");
+        }
     }
 
     @GetMapping
@@ -46,10 +77,31 @@ public class CarteraController {
     }
 
     @PutMapping
-    public void modificar(@RequestBody CarteraDTO dto){
-        ModelMapper m = new ModelMapper();
-        Cartera t = m.map(dto, Cartera.class);
-        vrCs.insert(t);
+    public void modificar(@RequestBody CarteraUpdateDTO dto) {
+        try {
+            // Obtener la cartera existente
+            Cartera carteraExistente = vrCs.listId(dto.getId());
+
+            if (carteraExistente == null) {
+                throw new RuntimeException("Cartera no encontrada");
+            }
+
+            // Actualizar solo los campos permitidos
+            if (dto.getBancos() != null) {
+                carteraExistente.setBancos(dto.getBancos());
+            }
+            if (dto.getFecha_descuento() != null) {
+                carteraExistente.setFecha_descuento(dto.getFecha_descuento());
+            }
+            if (dto.getMoneda() != null && !dto.getMoneda().trim().isEmpty()) {
+                carteraExistente.setMoneda(dto.getMoneda());
+            }
+
+            // Guardar los cambios
+            vrCs.insert(carteraExistente);
+        } catch (Exception e) {
+            throw new RuntimeException("Error al modificar la cartera: " + e.getMessage());
+        }
     }
 
     @GetMapping("/listar/{userId}")

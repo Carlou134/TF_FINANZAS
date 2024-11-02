@@ -32,4 +32,9 @@ public class UserServiceImpl implements IUserService {
     public Users listarId(Long idUsuario) {
         return uR.findById(idUsuario).orElse(new Users());
     }
+
+    @Override
+    public List<Users> buscarUsername(String username) {
+        return uR.buscarUsername(username);
+    }
 }

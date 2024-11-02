@@ -55,4 +55,11 @@ public class UserController {
         }).collect(Collectors.toList());
     }
 
+    @GetMapping("/buscar/{username}")
+    public List<UserDTO> buscarPorUsername(@PathVariable("username") String username) {
+        return uS.buscarUsername(username).stream().map(x->{
+            ModelMapper vrm=new ModelMapper();
+            return vrm.map(x, UserDTO.class);
+        }).collect(Collectors.toList());
+    }
 }

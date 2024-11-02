@@ -8,13 +8,14 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pe.edu.upc.aaw.tf_finanzas.entities.Users;
 
+import java.util.List;
+
 @Repository
 public interface IUserRepository extends JpaRepository<Users, Long> {
     public Users findByUsername(String username);
 
-    //BUSCAR POR NOMBRE
-    @Query("select count(u.username) from Users u where u.username =:username")
-    public int buscarUsername(@Param("username") String nombre);
+    @Query("select u from Users u where u.username =:username")
+    List<Users> buscarUsername(@Param("username") String nombre);
 
 
     //INSERTAR ROLES

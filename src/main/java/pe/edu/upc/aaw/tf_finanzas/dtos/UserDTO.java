@@ -1,7 +1,5 @@
 package pe.edu.upc.aaw.tf_finanzas.dtos;
 
-import jakarta.persistence.Column;
-
 public class UserDTO {
     private Long id;
     private String username;

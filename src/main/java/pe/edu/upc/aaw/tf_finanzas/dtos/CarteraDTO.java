@@ -1,7 +1,6 @@
 package pe.edu.upc.aaw.tf_finanzas.dtos;
 
 import pe.edu.upc.aaw.tf_finanzas.entities.Bancos;
-import pe.edu.upc.aaw.tf_finanzas.entities.Users;
 
 import java.time.LocalDate;
 

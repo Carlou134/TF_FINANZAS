@@ -12,4 +12,6 @@ public interface IUserService {
     public void delete(Long idUsuario);
 
     public Users listarId(Long idUsuario);
+
+    List<Users> buscarUsername(String username);
 }
