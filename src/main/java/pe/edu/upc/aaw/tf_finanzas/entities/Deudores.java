@@ -8,24 +8,28 @@ public class Deudores {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "tipo_documento", length = 30, nullable = false)
-    private String tipo_documento;
-    @Column(name = "numero_documento", length = 20, nullable = false)
-    private String numero_documento;
+    @Column(name = "ruc", length = 11, nullable = false)
+    private String ruc;
     @Column(name = "razon_social", length = 11, nullable = false)
     private String razon_social;
     @Column(name = "direccion", length = 200, nullable = false)
     private String direccion;
+    @Column(name = "telefono", length = 20, nullable = false)
+    private String telefono;
+    @Column(name = "email", length = 20, nullable = false)
+    private String email;
+
 
     public Deudores() {
     }
 
-    public Deudores(int id, String tipo_documento, String numero_documento, String razon_social, String direccion) {
+    public Deudores(int id, String ruc, String razon_social, String direccion, String telefono, String email) {
         this.id = id;
-        this.tipo_documento = tipo_documento;
-        this.numero_documento = numero_documento;
+        this.ruc = ruc;
         this.razon_social = razon_social;
         this.direccion = direccion;
+        this.telefono = telefono;
+        this.email = email;
     }
 
     public int getId() {
@@ -36,20 +40,12 @@ public class Deudores {
         this.id = id;
     }
 
-    public String getTipo_documento() {
-        return tipo_documento;
+    public String getRuc() {
+        return ruc;
     }
 
-    public void setTipo_documento(String tipo_documento) {
-        this.tipo_documento = tipo_documento;
-    }
-
-    public String getNumero_documento() {
-        return numero_documento;
-    }
-
-    public void setNumero_documento(String numero_documento) {
-        this.numero_documento = numero_documento;
+    public void setRuc(String ruc) {
+        this.ruc = ruc;
     }
 
     public String getRazon_social() {
@@ -66,5 +62,21 @@ public class Deudores {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

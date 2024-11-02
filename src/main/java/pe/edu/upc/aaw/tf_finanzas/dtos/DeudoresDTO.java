@@ -2,10 +2,11 @@ package pe.edu.upc.aaw.tf_finanzas.dtos;
 
 public class DeudoresDTO {
     private int id;
-    private String tipo_documento;
-    private String numero_documento;
+    private String ruc;
     private String razon_social;
     private String direccion;
+    private String telefono;
+    private String email;
 
     public int getId() {
         return id;
@@ -15,20 +16,12 @@ public class DeudoresDTO {
         this.id = id;
     }
 
-    public String getTipo_documento() {
-        return tipo_documento;
+    public String getRuc() {
+        return ruc;
     }
 
-    public void setTipo_documento(String tipo_documento) {
-        this.tipo_documento = tipo_documento;
-    }
-
-    public String getNumero_documento() {
-        return numero_documento;
-    }
-
-    public void setNumero_documento(String numero_documento) {
-        this.numero_documento = numero_documento;
+    public void setRuc(String ruc) {
+        this.ruc = ruc;
     }
 
     public String getRazon_social() {
@@ -45,5 +38,21 @@ public class DeudoresDTO {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
