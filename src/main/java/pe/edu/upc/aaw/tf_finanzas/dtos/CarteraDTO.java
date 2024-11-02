@@ -1,6 +1,8 @@
 package pe.edu.upc.aaw.tf_finanzas.dtos;
 
 import pe.edu.upc.aaw.tf_finanzas.entities.Bancos;
+import pe.edu.upc.aaw.tf_finanzas.entities.Users;
+
 import java.time.LocalDate;
 
 public class CarteraDTO {
@@ -10,8 +12,11 @@ public class CarteraDTO {
     private LocalDate fecha_descuento;
     private String moneda;
     private double total_valor_nominal;
-    private double total_valor_descontado;
-    private double total_descuento;
+    private double total_valor_portes;
+    private double total_comision_estudios;
+    private double total_desembolso_cobranza;
+    private double total_igv;
+    private double total_valor_neto;
     private double tcea;
     private int dias_promedio;
     private String estado;
@@ -64,20 +69,44 @@ public class CarteraDTO {
         this.total_valor_nominal = total_valor_nominal;
     }
 
-    public double getTotal_valor_descontado() {
-        return total_valor_descontado;
+    public double getTotal_valor_portes() {
+        return total_valor_portes;
     }
 
-    public void setTotal_valor_descontado(double total_valor_descontado) {
-        this.total_valor_descontado = total_valor_descontado;
+    public void setTotal_valor_portes(double total_valor_portes) {
+        this.total_valor_portes = total_valor_portes;
     }
 
-    public double getTotal_descuento() {
-        return total_descuento;
+    public double getTotal_comision_estudios() {
+        return total_comision_estudios;
     }
 
-    public void setTotal_descuento(double total_descuento) {
-        this.total_descuento = total_descuento;
+    public void setTotal_comision_estudios(double total_comision_estudios) {
+        this.total_comision_estudios = total_comision_estudios;
+    }
+
+    public double getTotal_desembolso_cobranza() {
+        return total_desembolso_cobranza;
+    }
+
+    public void setTotal_desembolso_cobranza(double total_desembolso_cobranza) {
+        this.total_desembolso_cobranza = total_desembolso_cobranza;
+    }
+
+    public double getTotal_igv() {
+        return total_igv;
+    }
+
+    public void setTotal_igv(double total_igv) {
+        this.total_igv = total_igv;
+    }
+
+    public double getTotal_valor_neto() {
+        return total_valor_neto;
+    }
+
+    public void setTotal_valor_neto(double total_valor_neto) {
+        this.total_valor_neto = total_valor_neto;
     }
 
     public double getTcea() {
