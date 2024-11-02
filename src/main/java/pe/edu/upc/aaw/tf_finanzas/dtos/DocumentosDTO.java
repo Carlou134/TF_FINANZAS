@@ -1,7 +1,5 @@
 package pe.edu.upc.aaw.tf_finanzas.dtos;
 
-
-import pe.edu.upc.aaw.tf_finanzas.entities.Cartera;
 import pe.edu.upc.aaw.tf_finanzas.entities.Deudores;
 
 import java.time.LocalDate;
