@@ -1,6 +1,7 @@
 package pe.edu.upc.aaw.tf_finanzas.servicesimplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import pe.edu.upc.aaw.tf_finanzas.entities.Cartera;
 import pe.edu.upc.aaw.tf_finanzas.repositories.ICarteraRepository;
@@ -32,4 +33,11 @@ public class CarteraServiceImpl implements ICarteraService {
     public Cartera listId(int idCartera) {
         return vrCR.findById(idCartera).orElse(new Cartera());
     }
+
+    @Override
+    public List<Cartera> findCarteraByIdUser(int idUsuario) {
+        return vrCR.findCarteraByIdUser(idUsuario);
+    }
+
+
 }

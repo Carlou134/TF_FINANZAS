@@ -7,7 +7,9 @@ import pe.edu.upc.aaw.tf_finanzas.dtos.CarteraDTO;
 import pe.edu.upc.aaw.tf_finanzas.entities.Cartera;
 import pe.edu.upc.aaw.tf_finanzas.servicesinterfaces.ICarteraService;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -48,5 +50,13 @@ public class CarteraController {
         ModelMapper m = new ModelMapper();
         Cartera t = m.map(dto, Cartera.class);
         vrCs.insert(t);
+    }
+
+    @GetMapping("/listar/{userId}")
+    public List<CarteraDTO> listarPorUsuarios(@PathVariable("userId") int userId) {
+        return vrCs.findCarteraByIdUser(userId).stream().map(x->{
+            ModelMapper vrm=new ModelMapper();
+            return vrm.map(x,CarteraDTO.class);
+        }).collect(Collectors.toList());
     }
 }

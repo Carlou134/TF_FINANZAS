@@ -1,5 +1,6 @@
 package pe.edu.upc.aaw.tf_finanzas.servicesinterfaces;
 
+import org.springframework.data.repository.query.Param;
 import pe.edu.upc.aaw.tf_finanzas.entities.Cartera;
 
 import java.util.List;
@@ -9,4 +10,5 @@ public interface ICarteraService {
     public List<Cartera> vrlist();
     public void delete(int idCartera);
     public Cartera listId(int idCartera);
+    List<Cartera> findCarteraByIdUser(int idUsuario);
 }
