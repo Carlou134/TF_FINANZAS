@@ -49,4 +49,12 @@ public class DocumentosController {
         Documentos t = m.map(dto, Documentos.class);
         vrDs.insert(t);
     }
+
+    @GetMapping("/listar/{idCartera}")
+    public List<DocumentosDTO> listarPorCartera(@PathVariable("idCartera") int idCartera) {
+        return vrDs.findDocumentosByIdCartera(idCartera).stream().map(x->{
+            ModelMapper vrm=new ModelMapper();
+            return vrm.map(x,DocumentosDTO.class);
+        }).collect(Collectors.toList());
+    }
 }

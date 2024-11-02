@@ -34,4 +34,9 @@ public class DocumentosServiceImpl implements IDocumentosService {
     public Documentos listId(int idDocumentos) {
         return vrDr.findById(idDocumentos).orElse(new Documentos());
     }
+
+    @Override
+    public List<Documentos> findDocumentosByIdCartera(int idCartera) {
+        return vrDr.findDocumentosByIdCartera(idCartera);
+    }
 }
