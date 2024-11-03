@@ -11,5 +11,5 @@ import java.util.List;
 @Repository
 public interface ICarteraRepository extends JpaRepository<Cartera, Integer> {
     @Query("SELECT c FROM Cartera c WHERE c.usuarios.id = :idUsuario")
-    List<Cartera> findCarteraByIdUser(@Param("idUsuario") int idUsuario);
+    List<Cartera> findCarteraByIdUser(@Param("idUsuario") long idUsuario);
 }

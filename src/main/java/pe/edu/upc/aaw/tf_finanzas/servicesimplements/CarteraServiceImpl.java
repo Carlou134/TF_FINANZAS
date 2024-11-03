@@ -35,7 +35,7 @@ public class CarteraServiceImpl implements ICarteraService {
     }
 
     @Override
-    public List<Cartera> findCarteraByIdUser(int idUsuario) {
+    public List<Cartera> findCarteraByIdUser(long idUsuario) {
         return vrCR.findCarteraByIdUser(idUsuario);
     }
 

@@ -10,5 +10,5 @@ public interface ICarteraService {
     public List<Cartera> vrlist();
     public void delete(int idCartera);
     public Cartera listId(int idCartera);
-    List<Cartera> findCarteraByIdUser(int idUsuario);
+    List<Cartera> findCarteraByIdUser(long idUsuario);
 }

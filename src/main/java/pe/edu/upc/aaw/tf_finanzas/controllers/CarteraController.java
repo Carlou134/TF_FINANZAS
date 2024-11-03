@@ -104,11 +104,22 @@ public class CarteraController {
         }
     }
 
-    @GetMapping("/listar/{userId}")
-    public List<CarteraDTO> listarPorUsuarios(@PathVariable("userId") int userId) {
-        return vrCs.findCarteraByIdUser(userId).stream().map(x->{
-            ModelMapper vrm=new ModelMapper();
-            return vrm.map(x,CarteraDTO.class);
-        }).collect(Collectors.toList());
+    @GetMapping("/listar/carteraporusuario")
+    public List<CarteraDTO> listarPorUsuarios() {
+        // Obtener el username del contexto de seguridad
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+
+        // Buscar el usuario
+        List<Users> usuarios = uS.buscarUsername(username);
+        if (!usuarios.isEmpty()) {
+            Users usuario = usuarios.get(0);
+            return vrCs.findCarteraByIdUser(usuario.getId()).stream().map(x->{
+                ModelMapper vrm = new ModelMapper();
+                return vrm.map(x, CarteraDTO.class);
+            }).collect(Collectors.toList());
+        } else {
+            throw new RuntimeException("Usuario no encontrado");
+        }
     }
 }
