@@ -32,6 +32,23 @@ public class UserController {
     public void modificar(@RequestBody UserDTO dto) {
         ModelMapper m = new ModelMapper();
         Users u = m.map(dto, Users.class);
+
+        // Obtener el usuario existente con sus roles y datos
+        Users existingUser = uS.listarId(u.getId());
+
+        // Mantener los roles existentes
+        u.setRoles(existingUser.getRoles());
+
+        // Verificar si la contraseña enviada es diferente a la almacenada
+        if (u.getPassword() != null && !u.getPassword().equals(existingUser.getPassword())) {
+            // Solo codificar si es una nueva contraseña
+            String encodedPassword = passwordEncoder.encode(u.getPassword());
+            u.setPassword(encodedPassword);
+        } else {
+            // Mantener la contraseña existente sin modificar
+            u.setPassword(existingUser.getPassword());
+        }
+
         uS.insert(u);
     }
 
