@@ -28,12 +28,12 @@ public class Documentos {
     private LocalDate fecha_vencimiento;
     @Column(name = "moneda", length = 30, nullable = false)
     private String moneda;
-    @Column(name = "tasa_descuento")
-    private double tasa_descuento;
+    @Column(name = "valor_tasa")
+    private double valor_tasa;
     @Column(name = "tipo_tasa", length = 100, nullable = false)
     private String tipo_tasa;
-    @Column(name = "dias_descuento")
-    private int dias_descuento;
+    @Column(name = "dias_tasa", length = 100, nullable = false)
+    private String dias_tasa;
     @Column(name = "periodo_capitalizacion", length = 100, nullable = false)
     private String periodo_capitalizacion;
     @Column(name = "tasa_efectiva_calculada")
@@ -50,6 +50,10 @@ public class Documentos {
     private double comision_cobranza;
     @Column(name = "igv")
     private double igv;
+    @Column(name = "dias_descuento")
+    private int dias_descuento;
+    @Column(name = "tasa_descuento")
+    private double tasa_descuento;
     @Column(name = "valor_neto")
     private double valor_neto;
     @Column(name = "estado", length = 30, nullable = false)
@@ -58,7 +62,7 @@ public class Documentos {
     public Documentos() {
     }
 
-    public Documentos(int id, Cartera cartera, Deudores deudor, String tipo, String numero_documento, double valor_nominal, LocalDate fecha_emision, LocalDate fecha_vencimiento, String moneda, double tasa_descuento, String tipo_tasa, int dias_descuento, String periodo_capitalizacion, double tasa_efectiva_calculada, String tipo_tasa_efectiva, double portes, double comision_estudios, double comision_desembolso, double comision_cobranza, double igv, double valor_neto, String estado) {
+    public Documentos(int id, Cartera cartera, Deudores deudor, String tipo, String numero_documento, double valor_nominal, LocalDate fecha_emision, LocalDate fecha_vencimiento, String moneda, double valor_tasa, String tipo_tasa, String dias_tasa, String periodo_capitalizacion, double tasa_efectiva_calculada, String tipo_tasa_efectiva, double portes, double comision_estudios, double comision_desembolso, double comision_cobranza, double igv, int dias_descuento, double tasa_descuento, double valor_neto, String estado) {
         this.id = id;
         this.cartera = cartera;
         this.deudor = deudor;
@@ -68,9 +72,9 @@ public class Documentos {
         this.fecha_emision = fecha_emision;
         this.fecha_vencimiento = fecha_vencimiento;
         this.moneda = moneda;
-        this.tasa_descuento = tasa_descuento;
+        this.valor_tasa = valor_tasa;
         this.tipo_tasa = tipo_tasa;
-        this.dias_descuento = dias_descuento;
+        this.dias_tasa = dias_tasa;
         this.periodo_capitalizacion = periodo_capitalizacion;
         this.tasa_efectiva_calculada = tasa_efectiva_calculada;
         this.tipo_tasa_efectiva = tipo_tasa_efectiva;
@@ -79,6 +83,8 @@ public class Documentos {
         this.comision_desembolso = comision_desembolso;
         this.comision_cobranza = comision_cobranza;
         this.igv = igv;
+        this.dias_descuento = dias_descuento;
+        this.tasa_descuento = tasa_descuento;
         this.valor_neto = valor_neto;
         this.estado = estado;
     }
@@ -155,12 +161,12 @@ public class Documentos {
         this.moneda = moneda;
     }
 
-    public double getTasa_descuento() {
-        return tasa_descuento;
+    public double getValor_tasa() {
+        return valor_tasa;
     }
 
-    public void setTasa_descuento(double tasa_descuento) {
-        this.tasa_descuento = tasa_descuento;
+    public void setValor_tasa(double valor_tasa) {
+        this.valor_tasa = valor_tasa;
     }
 
     public String getTipo_tasa() {
@@ -171,12 +177,12 @@ public class Documentos {
         this.tipo_tasa = tipo_tasa;
     }
 
-    public int getDias_descuento() {
-        return dias_descuento;
+    public String getDias_tasa() {
+        return dias_tasa;
     }
 
-    public void setDias_descuento(int dias_descuento) {
-        this.dias_descuento = dias_descuento;
+    public void setDias_tasa(String dias_tasa) {
+        this.dias_tasa = dias_tasa;
     }
 
     public String getPeriodo_capitalizacion() {
@@ -241,6 +247,22 @@ public class Documentos {
 
     public void setIgv(double igv) {
         this.igv = igv;
+    }
+
+    public int getDias_descuento() {
+        return dias_descuento;
+    }
+
+    public void setDias_descuento(int dias_descuento) {
+        this.dias_descuento = dias_descuento;
+    }
+
+    public double getTasa_descuento() {
+        return tasa_descuento;
+    }
+
+    public void setTasa_descuento(double tasa_descuento) {
+        this.tasa_descuento = tasa_descuento;
     }
 
     public double getValor_neto() {

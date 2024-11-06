@@ -14,9 +14,9 @@ public class DocumentosDTO {
     private LocalDate fecha_emision;
     private LocalDate fecha_vencimiento;
     private String moneda;
-    private double tasa_descuento;
+    private double valor_tasa;
     private String tipo_tasa;
-    private int dias_descuento;
+    private String dias_tasa;
     private String periodo_capitalizacion;
     private double tasa_efectiva_calculada;
     private String tipo_tasa_efectiva;
@@ -25,6 +25,8 @@ public class DocumentosDTO {
     private double comision_desembolso;
     private double comision_cobranza;
     private double igv;
+    private int dias_descuento;
+    private double tasa_descuento;
     private double valor_neto;
     private String estado;
 
@@ -100,12 +102,12 @@ public class DocumentosDTO {
         this.moneda = moneda;
     }
 
-    public double getTasa_descuento() {
-        return tasa_descuento;
+    public double getValor_tasa() {
+        return valor_tasa;
     }
 
-    public void setTasa_descuento(double tasa_descuento) {
-        this.tasa_descuento = tasa_descuento;
+    public void setValor_tasa(double valor_tasa) {
+        this.valor_tasa = valor_tasa;
     }
 
     public String getTipo_tasa() {
@@ -116,12 +118,12 @@ public class DocumentosDTO {
         this.tipo_tasa = tipo_tasa;
     }
 
-    public int getDias_descuento() {
-        return dias_descuento;
+    public String getDias_tasa() {
+        return dias_tasa;
     }
 
-    public void setDias_descuento(int dias_descuento) {
-        this.dias_descuento = dias_descuento;
+    public void setDias_tasa(String dias_tasa) {
+        this.dias_tasa = dias_tasa;
     }
 
     public String getPeriodo_capitalizacion() {
@@ -186,6 +188,22 @@ public class DocumentosDTO {
 
     public void setIgv(double igv) {
         this.igv = igv;
+    }
+
+    public int getDias_descuento() {
+        return dias_descuento;
+    }
+
+    public void setDias_descuento(int dias_descuento) {
+        this.dias_descuento = dias_descuento;
+    }
+
+    public double getTasa_descuento() {
+        return tasa_descuento;
+    }
+
+    public void setTasa_descuento(double tasa_descuento) {
+        this.tasa_descuento = tasa_descuento;
     }
 
     public double getValor_neto() {
