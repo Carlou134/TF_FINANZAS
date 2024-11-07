@@ -34,7 +34,7 @@ public class Documentos {
     private String tipo_tasa;
     @Column(name = "dias_tasa", length = 100, nullable = false)
     private String dias_tasa;
-    @Column(name = "periodo_capitalizacion", length = 100, nullable = false)
+    @Column(name = "periodo_capitalizacion", length = 100, nullable = true)
     private String periodo_capitalizacion;
     @Column(name = "tasa_efectiva_calculada")
     private double tasa_efectiva_calculada;
