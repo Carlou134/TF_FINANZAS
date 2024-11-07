@@ -8,9 +8,9 @@ public class Deudores {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "ruc", length = 11, nullable = false)
+    @Column(name = "ruc", length = 20, nullable = false)
     private String ruc;
-    @Column(name = "razon_social", length = 11, nullable = false)
+    @Column(name = "razon_social", length = 200, nullable = false)
     private String razon_social;
     @Column(name = "direccion", length = 200, nullable = false)
     private String direccion;
