@@ -16,7 +16,7 @@ public class Deudores {
     private String direccion;
     @Column(name = "telefono", length = 20, nullable = false)
     private String telefono;
-    @Column(name = "email", length = 20, nullable = false)
+    @Column(name = "email", length = 200, nullable = false)
     private String email;
 
 
