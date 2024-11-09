@@ -7,6 +7,7 @@ import pe.edu.upc.aaw.tf_finanzas.entities.Cartera;
 import pe.edu.upc.aaw.tf_finanzas.repositories.ICarteraRepository;
 import pe.edu.upc.aaw.tf_finanzas.servicesinterfaces.ICarteraService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -37,6 +38,11 @@ public class CarteraServiceImpl implements ICarteraService {
     @Override
     public List<Cartera> findCarteraByIdUser(long idUsuario) {
         return vrCR.findCarteraByIdUser(idUsuario);
+    }
+
+    @Override
+    public List<LocalDate> getDiasCarteraById(int idCartera) {
+        return vrCR.getDiasCarteraById(idCartera);
     }
 
 

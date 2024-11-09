@@ -38,8 +38,6 @@ public class Documentos {
     private String periodo_capitalizacion;
     @Column(name = "tasa_efectiva_calculada")
     private double tasa_efectiva_calculada;
-    @Column(name = "tipo_tasa_efectiva", length = 50, nullable = false)
-    private String tipo_tasa_efectiva;
     @Column(name = "portes")
     private double portes;
     @Column(name = "comision_estudios")
@@ -56,13 +54,15 @@ public class Documentos {
     private double tasa_descuento;
     @Column(name = "valor_neto")
     private double valor_neto;
+    @Column(name = "intereses_calculados")
+    private double intereses_calculados;
     @Column(name = "estado", length = 30, nullable = false)
     private String estado;
 
     public Documentos() {
     }
 
-    public Documentos(int id, Cartera cartera, Deudores deudor, String tipo, String numero_documento, double valor_nominal, LocalDate fecha_emision, LocalDate fecha_vencimiento, String moneda, double valor_tasa, String tipo_tasa, String dias_tasa, String periodo_capitalizacion, double tasa_efectiva_calculada, String tipo_tasa_efectiva, double portes, double comision_estudios, double comision_desembolso, double comision_cobranza, double igv, int dias_descuento, double tasa_descuento, double valor_neto, String estado) {
+    public Documentos(int id, Cartera cartera, Deudores deudor, String tipo, String numero_documento, double valor_nominal, LocalDate fecha_emision, LocalDate fecha_vencimiento, String moneda, double valor_tasa, String tipo_tasa, String dias_tasa, String periodo_capitalizacion, double tasa_efectiva_calculada, double portes, double comision_estudios, double comision_desembolso, double comision_cobranza, double igv, int dias_descuento, double tasa_descuento, double valor_neto, double intereses_calculados, String estado) {
         this.id = id;
         this.cartera = cartera;
         this.deudor = deudor;
@@ -77,7 +77,6 @@ public class Documentos {
         this.dias_tasa = dias_tasa;
         this.periodo_capitalizacion = periodo_capitalizacion;
         this.tasa_efectiva_calculada = tasa_efectiva_calculada;
-        this.tipo_tasa_efectiva = tipo_tasa_efectiva;
         this.portes = portes;
         this.comision_estudios = comision_estudios;
         this.comision_desembolso = comision_desembolso;
@@ -86,6 +85,7 @@ public class Documentos {
         this.dias_descuento = dias_descuento;
         this.tasa_descuento = tasa_descuento;
         this.valor_neto = valor_neto;
+        this.intereses_calculados = intereses_calculados;
         this.estado = estado;
     }
 
@@ -201,14 +201,6 @@ public class Documentos {
         this.tasa_efectiva_calculada = tasa_efectiva_calculada;
     }
 
-    public String getTipo_tasa_efectiva() {
-        return tipo_tasa_efectiva;
-    }
-
-    public void setTipo_tasa_efectiva(String tipo_tasa_efectiva) {
-        this.tipo_tasa_efectiva = tipo_tasa_efectiva;
-    }
-
     public double getPortes() {
         return portes;
     }
@@ -271,6 +263,14 @@ public class Documentos {
 
     public void setValor_neto(double valor_neto) {
         this.valor_neto = valor_neto;
+    }
+
+    public double getIntereses_calculados() {
+        return intereses_calculados;
+    }
+
+    public void setIntereses_calculados(double intereses_calculados) {
+        this.intereses_calculados = intereses_calculados;
     }
 
     public String getEstado() {

@@ -1,5 +1,6 @@
 package pe.edu.upc.aaw.tf_finanzas.dtos;
 
+import jakarta.persistence.Column;
 import pe.edu.upc.aaw.tf_finanzas.entities.Deudores;
 
 import java.time.LocalDate;
@@ -19,7 +20,6 @@ public class DocumentosDTO {
     private String dias_tasa;
     private String periodo_capitalizacion;
     private double tasa_efectiva_calculada;
-    private String tipo_tasa_efectiva;
     private double portes;
     private double comision_estudios;
     private double comision_desembolso;
@@ -28,6 +28,7 @@ public class DocumentosDTO {
     private int dias_descuento;
     private double tasa_descuento;
     private double valor_neto;
+    private double intereses_calculados;
     private String estado;
 
     public int getId() {
@@ -142,14 +143,6 @@ public class DocumentosDTO {
         this.tasa_efectiva_calculada = tasa_efectiva_calculada;
     }
 
-    public String getTipo_tasa_efectiva() {
-        return tipo_tasa_efectiva;
-    }
-
-    public void setTipo_tasa_efectiva(String tipo_tasa_efectiva) {
-        this.tipo_tasa_efectiva = tipo_tasa_efectiva;
-    }
-
     public double getPortes() {
         return portes;
     }
@@ -212,6 +205,14 @@ public class DocumentosDTO {
 
     public void setValor_neto(double valor_neto) {
         this.valor_neto = valor_neto;
+    }
+
+    public double getIntereses_calculados() {
+        return intereses_calculados;
+    }
+
+    public void setIntereses_calculados(double intereses_calculados) {
+        this.intereses_calculados = intereses_calculados;
     }
 
     public String getEstado() {

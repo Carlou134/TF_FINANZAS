@@ -12,6 +12,7 @@ import pe.edu.upc.aaw.tf_finanzas.entities.Users;
 import pe.edu.upc.aaw.tf_finanzas.servicesinterfaces.ICarteraService;
 import pe.edu.upc.aaw.tf_finanzas.servicesinterfaces.IUserService;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -121,5 +122,13 @@ public class CarteraController {
         } else {
             throw new RuntimeException("Usuario no encontrado");
         }
+    }
+
+    @GetMapping("/dias-cartera/{idCartera}")
+    public List<LocalDate> listarDiasPorCartera(@PathVariable("idCartera") int idCartera) {
+        return vrCs.getDiasCarteraById(idCartera).stream().map(x->{
+            ModelMapper vrm=new ModelMapper();
+            return vrm.map(x,LocalDate.class);
+        }).collect(Collectors.toList());
     }
 }
