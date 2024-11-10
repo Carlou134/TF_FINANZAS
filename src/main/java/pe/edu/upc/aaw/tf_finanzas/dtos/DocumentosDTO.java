@@ -20,6 +20,7 @@ public class DocumentosDTO {
     private String dias_tasa;
     private String periodo_capitalizacion;
     private double tasa_efectiva_calculada;
+    private String tipo_tasa_efectiva;
     private double portes;
     private double comision_estudios;
     private double comision_desembolso;
@@ -141,6 +142,14 @@ public class DocumentosDTO {
 
     public void setTasa_efectiva_calculada(double tasa_efectiva_calculada) {
         this.tasa_efectiva_calculada = tasa_efectiva_calculada;
+    }
+
+    public String getTipo_tasa_efectiva() {
+        return tipo_tasa_efectiva;
+    }
+
+    public void setTipo_tasa_efectiva(String tipo_tasa_efectiva) {
+        this.tipo_tasa_efectiva = tipo_tasa_efectiva;
     }
 
     public double getPortes() {

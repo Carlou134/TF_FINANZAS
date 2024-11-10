@@ -41,16 +41,9 @@ public class CarteraController {
             vrc.setUsuarios(usuarios.get(0));
 
             // Establecer valores predeterminados
-            vrc.setEstado("PENDIENTE");
-            vrc.setTotal_valor_nominal(0.0);
-            vrc.setTotal_valor_portes(0.0);
-            vrc.setTotal_comision_estudios(0.0);
-            vrc.setTotal_desembolso_cobranza(0.0);
-            vrc.setTotal_igv(0.0);
             vrc.setTotal_valor_neto(0.0);
+            vrc.setTotal_valor_neto_convertido(0.0);
             vrc.setTcea(0.0);
-            vrc.setDias_promedio(0);
-
             vrCs.insert(vrc);
         } else {
             throw new RuntimeException("Usuario no encontrado");

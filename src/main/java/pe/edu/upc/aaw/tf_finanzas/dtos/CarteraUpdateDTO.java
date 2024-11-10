@@ -9,6 +9,7 @@ public class CarteraUpdateDTO {
     private Bancos bancos;
     private LocalDate fecha_descuento;
     private String moneda;
+    private String estado;
 
     public int getId() {
         return id;
@@ -40,5 +41,13 @@ public class CarteraUpdateDTO {
 
     public void setMoneda(String moneda) {
         this.moneda = moneda;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }
