@@ -13,4 +13,5 @@ public interface ICarteraService {
     public Cartera listId(int idCartera);
     List<Cartera> findCarteraByIdUser(long idUsuario);
     List<LocalDate> getDiasCarteraById(@Param("idCartera") int idCartera);
+    void updateCalculos(int idCartera);
 }

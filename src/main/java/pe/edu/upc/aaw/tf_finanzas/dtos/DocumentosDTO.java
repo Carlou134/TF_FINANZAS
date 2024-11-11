@@ -1,6 +1,5 @@
 package pe.edu.upc.aaw.tf_finanzas.dtos;
 
-import jakarta.persistence.Column;
 import pe.edu.upc.aaw.tf_finanzas.entities.Deudores;
 
 import java.time.LocalDate;

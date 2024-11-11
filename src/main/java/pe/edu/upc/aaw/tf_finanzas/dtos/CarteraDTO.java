@@ -10,8 +10,8 @@ public class CarteraDTO {
     private Bancos bancos;
     private LocalDate fecha_descuento;
     private String moneda;
+    private double total_valor_nominal;
     private double total_valor_neto;
-    private double total_valor_neto_convertido;
     private double tcea;
     private String estado;
 
@@ -55,20 +55,20 @@ public class CarteraDTO {
         this.moneda = moneda;
     }
 
+    public double getTotal_valor_nominal() {
+        return total_valor_nominal;
+    }
+
+    public void setTotal_valor_nominal(double total_valor_nominal) {
+        this.total_valor_nominal = total_valor_nominal;
+    }
+
     public double getTotal_valor_neto() {
         return total_valor_neto;
     }
 
     public void setTotal_valor_neto(double total_valor_neto) {
         this.total_valor_neto = total_valor_neto;
-    }
-
-    public double getTotal_valor_neto_convertido() {
-        return total_valor_neto_convertido;
-    }
-
-    public void setTotal_valor_neto_convertido(double total_valor_neto_convertido) {
-        this.total_valor_neto_convertido = total_valor_neto_convertido;
     }
 
     public double getTcea() {

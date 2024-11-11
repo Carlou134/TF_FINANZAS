@@ -41,8 +41,8 @@ public class CarteraController {
             vrc.setUsuarios(usuarios.get(0));
 
             // Establecer valores predeterminados
+            vrc.setTotal_valor_nominal(0.0);
             vrc.setTotal_valor_neto(0.0);
-            vrc.setTotal_valor_neto_convertido(0.0);
             vrc.setTcea(0.0);
             vrCs.insert(vrc);
         } else {
@@ -123,5 +123,10 @@ public class CarteraController {
             ModelMapper vrm=new ModelMapper();
             return vrm.map(x,LocalDate.class);
         }).collect(Collectors.toList());
+    }
+
+    @PutMapping("/calculos/{id}")
+    public void actualizarCalculos(@PathVariable("id") Integer id) {
+        vrCs.updateCalculos(id);
     }
 }

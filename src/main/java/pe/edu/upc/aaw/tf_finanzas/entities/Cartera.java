@@ -20,10 +20,10 @@ public class Cartera {
     private LocalDate fecha_descuento;
     @Column(name = "moneda", length = 15, nullable = false)
     private String moneda;
+    @Column(name = "total_valor_nominal")
+    private double total_valor_nominal;
     @Column(name = "total_valor_neto")
     private double total_valor_neto;
-    @Column(name = "total_valor_neto_convertido")
-    private double total_valor_neto_convertido;
     @Column(name = "tcea")
     private double tcea;
     @Column(name = "estado", length = 20, nullable = false)
@@ -32,14 +32,14 @@ public class Cartera {
     public Cartera() {
     }
 
-    public Cartera(int id, Users usuarios, Bancos bancos, LocalDate fecha_descuento, String moneda, double total_valor_neto, double total_valor_neto_convertido, double tcea, String estado) {
+    public Cartera(int id, Users usuarios, Bancos bancos, LocalDate fecha_descuento, String moneda, double total_valor_nominal, double total_valor_neto, double tcea, String estado) {
         this.id = id;
         this.usuarios = usuarios;
         this.bancos = bancos;
         this.fecha_descuento = fecha_descuento;
         this.moneda = moneda;
+        this.total_valor_nominal = total_valor_nominal;
         this.total_valor_neto = total_valor_neto;
-        this.total_valor_neto_convertido = total_valor_neto_convertido;
         this.tcea = tcea;
         this.estado = estado;
     }
@@ -84,20 +84,20 @@ public class Cartera {
         this.moneda = moneda;
     }
 
+    public double getTotal_valor_nominal() {
+        return total_valor_nominal;
+    }
+
+    public void setTotal_valor_nominal(double total_valor_nominal) {
+        this.total_valor_nominal = total_valor_nominal;
+    }
+
     public double getTotal_valor_neto() {
         return total_valor_neto;
     }
 
     public void setTotal_valor_neto(double total_valor_neto) {
         this.total_valor_neto = total_valor_neto;
-    }
-
-    public double getTotal_valor_neto_convertido() {
-        return total_valor_neto_convertido;
-    }
-
-    public void setTotal_valor_neto_convertido(double total_valor_neto_convertido) {
-        this.total_valor_neto_convertido = total_valor_neto_convertido;
     }
 
     public double getTcea() {
