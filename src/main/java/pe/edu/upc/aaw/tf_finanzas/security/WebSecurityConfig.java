@@ -65,6 +65,7 @@ public class WebSecurityConfig {
                         .requestMatchers(antMatcher("/login")).permitAll()
                         .requestMatchers(antMatcher("/usuarios")).permitAll()
                         .requestMatchers(antMatcher("/roles")).permitAll()
+                        .requestMatchers(antMatcher("/usuarios/buscar/**")).permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
