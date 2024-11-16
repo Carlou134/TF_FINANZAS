@@ -11,7 +11,6 @@ import pe.edu.upc.aaw.tf_finanzas.servicesinterfaces.IValorDolarService;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -73,7 +72,7 @@ public class CarteraServiceImpl implements ICarteraService {
                 double valorNominal = doc.getValor_nominal();
                 double valorNetoAjustado = (valorNominal - totalCostos) / Math.pow(1 + tea, calculateYears(doc.getFecha_emision(), doc.getFecha_vencimiento()));  // Descontando al presente
 
-                // Conversión de moneda si las monedas no coinciden
+                // Conversion de moneda si las monedas no coinciden
                 if (!monedaCartera.equals(doc.getMoneda())) {
                     valorNetoAjustado = convertirMoneda(valorNetoAjustado, monedaCartera, doc.getMoneda(), valorDolar);
                 }
@@ -82,7 +81,7 @@ public class CarteraServiceImpl implements ICarteraService {
                 totalValorNominal += valorNominal;
             }
 
-            // Cálculo de TCEA usando la fórmula proporcionada
+            // Calculo de TCEA usando la fórmula proporcionada
             double tcea = calculateTCEA(totalValorNeto, totalValorNominal, 360, 360); // Suponiendo que tanto TEP como días a trasladar son 360
             cartera.setTotal_valor_neto(totalValorNeto);
             cartera.setTotal_valor_nominal(totalValorNominal);
