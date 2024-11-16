@@ -10,6 +10,8 @@ import pe.edu.upc.aaw.tf_finanzas.servicesinterfaces.IDocumentosService;
 import pe.edu.upc.aaw.tf_finanzas.servicesinterfaces.IValorDolarService;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -66,60 +68,25 @@ public class CarteraServiceImpl implements ICarteraService {
             double totalValorNominal = 0.0;
 
             for (Documentos doc : documentos) {
-                int diasDescuento = doc.getDias_descuento();
-                double tasaDescuento = doc.getTasa_descuento() / 100;
-                double tasa_descuento_anual;
-
-                if (diasDescuento == 360) {
-                    // Si los días son 360, usar la tasa de descuento original
-                    tasa_descuento_anual = tasaDescuento;
-                } else {
-                    // Si no, hacer el cálculo normal
-                    // 1. Calcular i' (tasa efectiva)
-                    double tasaDescontoPrima = tasaDescuento / (1 - tasaDescuento);
-
-                    // 2. Calcular TEA
-                    double tea = Math.pow(1 + tasaDescuento, 360.0 / diasDescuento) - 1;
-
-                    // 3. Calcular tasa de descuento anual
-                    tasa_descuento_anual = tea / (1 + tea);
-                }
-
-                // 4. Obtener valor nominal y calcular nuevo valor neto
+                double tea = calculateTEA(doc.getDias_descuento(), doc.getTasa_descuento() / 100);
+                double totalCostos = doc.getPortes() + doc.getComision_estudios() + doc.getComision_desembolso() + doc.getComision_cobranza() + doc.getIgv();
                 double valorNominal = doc.getValor_nominal();
-                String monedaDoc = doc.getMoneda();
+                double valorNetoAjustado = (valorNominal - totalCostos) / Math.pow(1 + tea, calculateYears(doc.getFecha_emision(), doc.getFecha_vencimiento()));  // Descontando al presente
 
-                // 5. Calcular nuevo valor neto con la tasa de descuento anual
-                double nuevoValorNeto = valorNominal * (1 - tasa_descuento_anual);
-
-                if (!monedaDoc.equals("SOLES") && !monedaDoc.equals("DOLARES")) {
-                    throw new RuntimeException("Moneda inválida en documento: " + monedaDoc);
+                // Conversión de moneda si las monedas no coinciden
+                if (!monedaCartera.equals(doc.getMoneda())) {
+                    valorNetoAjustado = convertirMoneda(valorNetoAjustado, monedaCartera, doc.getMoneda(), valorDolar);
                 }
 
-                // 6. Sumar a los totales según la moneda
-                if (monedaCartera.equals(monedaDoc)) {
-                    totalValorNeto += nuevoValorNeto;
-                    totalValorNominal += valorNominal;
-                } else {
-                    if (monedaCartera.equals("SOLES")) {
-                        totalValorNeto += nuevoValorNeto * valorDolar;
-                        totalValorNominal += valorNominal * valorDolar;
-                    } else {
-                        totalValorNeto += nuevoValorNeto / valorDolar;
-                        totalValorNominal += valorNominal / valorDolar;
-                    }
-                }
+                totalValorNeto += valorNetoAjustado;
+                totalValorNominal += valorNominal;
             }
 
-            double tcea = 0.0;
-            if (totalValorNominal != 0) {
-                tcea = (totalValorNeto / totalValorNominal) - 1;
-                tcea = tcea * 100; // Convertir a porcentaje
-            }
-
+            // Cálculo de TCEA usando la fórmula proporcionada
+            double tcea = calculateTCEA(totalValorNeto, totalValorNominal, 360, 360); // Suponiendo que tanto TEP como días a trasladar son 360
             cartera.setTotal_valor_neto(totalValorNeto);
             cartera.setTotal_valor_nominal(totalValorNominal);
-            cartera.setTcea(tcea);
+            cartera.setTcea(tcea * 100); // Convertir a porcentaje
             vrCR.save(cartera);
 
         } catch (Exception e) {
@@ -127,4 +94,28 @@ public class CarteraServiceImpl implements ICarteraService {
         }
     }
 
+    private double calculateTCEA(double C, double S, int diasTEP, int diasTrasladar) {
+        return Math.pow((S / C), ((double) diasTrasladar / diasTEP)) - 1;
+    }
+
+    private double calculateYears(LocalDate start, LocalDate end) {
+        return ChronoUnit.DAYS.between(start, end) / 365.25;
+    }
+
+    private double convertirMoneda(double monto, String monedaCartera, String monedaDocumento, double tipoCambio) {
+        if (monedaCartera.equals("SOLES") && monedaDocumento.equals("DOLARES")) {
+            return monto * tipoCambio;
+        } else if (monedaCartera.equals("DOLARES") && monedaDocumento.equals("SOLES")) {
+            return monto / tipoCambio;
+        }
+        return monto;  // No adjustment needed if currencies are the same
+    }
+
+    private double calculateTEA(int diasDescuento, double tasaDescuento) {
+        if (diasDescuento == 360) {
+            return tasaDescuento;
+        } else {
+            return Math.pow(1 + tasaDescuento, 360.0 / diasDescuento) - 1;
+        }
+    }
 }
