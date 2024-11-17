@@ -2,7 +2,6 @@ package pe.edu.upc.aaw.tf_finanzas.servicesimplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.edu.upc.aaw.tf_finanzas.entities.Deudores;
 import pe.edu.upc.aaw.tf_finanzas.entities.Documentos;
 import pe.edu.upc.aaw.tf_finanzas.repositories.IDocumentosRepository;
 import pe.edu.upc.aaw.tf_finanzas.servicesinterfaces.IDocumentosService;

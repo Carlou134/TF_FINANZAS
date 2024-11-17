@@ -80,6 +80,9 @@ public class CarteraController {
                 throw new RuntimeException("Cartera no encontrada");
             }
 
+            // Guardar la moneda anterior para comparar
+            String monedaAnterior = carteraExistente.getMoneda();
+
             // Actualizar solo los campos permitidos
             if (dto.getBancos() != null) {
                 carteraExistente.setBancos(dto.getBancos());
@@ -87,12 +90,24 @@ public class CarteraController {
             if (dto.getFecha_descuento() != null) {
                 carteraExistente.setFecha_descuento(dto.getFecha_descuento());
             }
+
+            boolean cambioMoneda = false;
             if (dto.getMoneda() != null && !dto.getMoneda().trim().isEmpty()) {
-                carteraExistente.setMoneda(dto.getMoneda());
+                // Verificar si la moneda realmente cambio
+                if (!dto.getMoneda().equals(monedaAnterior)) {
+                    carteraExistente.setMoneda(dto.getMoneda());
+                    cambioMoneda = true;
+                }
             }
 
             // Guardar los cambios
             vrCs.insert(carteraExistente);
+
+            // Si hubo cambio de moneda, ejecutar update Calculos a traves del servicio
+            if (cambioMoneda) {
+                vrCs.updateCalculos(dto.getId());
+            }
+
         } catch (Exception e) {
             throw new RuntimeException("Error al modificar la cartera: " + e.getMessage());
         }
