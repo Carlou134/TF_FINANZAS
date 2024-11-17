@@ -2,7 +2,8 @@ package pe.edu.upc.aaw.tf_finanzas.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.aaw.tf_finanzas.dtos.UserDTO;
@@ -79,5 +80,20 @@ public class UserController {
             ModelMapper vrm=new ModelMapper();
             return vrm.map(x, UserDTO.class);
         }).collect(Collectors.toList());
+    }
+
+    @GetMapping("/usuario/actual")
+    public UserDTO obtenerUsuarioActual() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+
+        List<Users> usuarios = uS.buscarUsername(username);
+        if (!usuarios.isEmpty()) {
+            ModelMapper m = new ModelMapper();
+            UserDTO dto = m.map(uS.listarId(usuarios.get(0).getId()), UserDTO.class);
+            return dto;
+        } else {
+            throw new RuntimeException("Usuario no encontrado");
+        }
     }
 }
