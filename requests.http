@@ -1,0 +1,127 @@
+### FacturaPro — end-to-end flow
+### Run the requests in order with the ▶ icon next to each one.
+
+@baseUrl = http://localhost:8080
+
+### 1. Register a user (public)
+POST {{baseUrl}}/usuarios
+Content-Type: application/json
+
+{
+  "username": "demo",
+  "password": "demo123",
+  "enabled": true,
+  "razon_social": "Demo SAC",
+  "ruc": "20123456789",
+  "direccion": "Av. Demo 123",
+  "email": "demo@example.com"
+}
+
+### 2. Assign a role (public)
+POST {{baseUrl}}/roles
+Content-Type: application/json
+
+{
+  "rol": "ADMIN",
+  "user": { "id": 1 }
+}
+
+### 3. Log in — stores the token automatically
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+  "username": "demo",
+  "password": "demo123"
+}
+
+> {% client.global.set("token", response.body.jwttoken); %}
+
+### 4. Create a bank
+POST {{baseUrl}}/bancos
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "nombre": "Banco Demo",
+  "codigo": "BD01",
+  "ruc": "20987654321"
+}
+
+### 5. Register the USD exchange rate
+POST {{baseUrl}}/dolar
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "valor_dolar": 3.75,
+  "fecha_registro": "2024-11-15"
+}
+
+### 6. Create a debtor
+POST {{baseUrl}}/deudores
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "ruc": "20555555555",
+  "razon_social": "Cliente Demo SAC",
+  "direccion": "Jr. Cliente 456",
+  "telefono": "999888777",
+  "email": "cliente@example.com"
+}
+
+### 7. Create a portfolio (user is taken from the token)
+POST {{baseUrl}}/cartera
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "bancos": { "id": 1 },
+  "fecha_descuento": "2024-11-15",
+  "moneda": "PEN",
+  "estado": "Activo"
+}
+
+### 8. Add an invoice to the portfolio
+POST {{baseUrl}}/documentos
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "cartera": { "id": 1 },
+  "deudor": { "id": 1 },
+  "tipo": "Factura",
+  "numero_documento": "F001-0001",
+  "valor_nominal": 10000,
+  "fecha_emision": "2024-11-15",
+  "fecha_vencimiento": "2025-02-13",
+  "moneda": "PEN",
+  "valor_tasa": 12,
+  "tipo_tasa": "Efectiva",
+  "dias_tasa": "360",
+  "periodo_capitalizacion": "Diaria",
+  "tasa_efectiva_calculada": 12,
+  "tipo_tasa_efectiva": "TEA",
+  "portes": 10,
+  "comision_estudios": 20,
+  "comision_desembolso": 15,
+  "comision_cobranza": 10,
+  "igv": 9.9,
+  "dias_descuento": 90,
+  "tasa_descuento": 2.79,
+  "valor_neto": 0,
+  "intereses_calculados": 0,
+  "estado": "Pendiente"
+}
+
+### 9. Recalculate the portfolio
+PUT {{baseUrl}}/cartera/calculos/1
+Authorization: Bearer {{token}}
+
+### 10. Read the results (total_valor_neto, tcea)
+GET {{baseUrl}}/cartera/1
+Authorization: Bearer {{token}}
+
+### 11. Without a token — should return 401
+GET {{baseUrl}}/cartera/1
