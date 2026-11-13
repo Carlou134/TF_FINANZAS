@@ -66,6 +66,7 @@ public class WebSecurityConfig {
                         .requestMatchers(antMatcher("/usuarios")).permitAll()
                         .requestMatchers(antMatcher("/roles")).permitAll()
                         .requestMatchers(antMatcher("/usuarios/buscar/**")).permitAll()
+                        .requestMatchers(antMatcher("/swagger-ui/**"), antMatcher("/swagger-ui.html"), antMatcher("/v3/api-docs/**")).permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
