@@ -93,6 +93,10 @@ All endpoints except the public ones require the header `Authorization: Bearer <
 
 CRUD endpoints follow the same pattern: `POST /`, `GET /`, `GET /{id}`, `PUT /`, `DELETE /{id}`.
 
+Interactive documentation is available at `http://localhost:8080/swagger-ui/index.html` once the app is running.
+
+![Swagger UI](docs/images/tffinanzas_swagger.png)
+
 ### Example: calculate a portfolio's TCEA
 
 **1. Log in and get a token**
