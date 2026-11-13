@@ -1,8 +1,11 @@
 package pe.edu.upc.aaw.tf_finanzas.dtos;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class UserDTO {
     private Long id;
     private String username;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     private Boolean enabled;
     private String razon_social;
